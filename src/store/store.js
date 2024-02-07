@@ -3,9 +3,14 @@ import { devtools, persist } from "zustand/middleware";
 import todoSlice from "./slices/todoSlice";
 
 const useStore = create(
-  devtools((...a) => ({
-    ...todoSlice(...a),
-  }))
+  persist(
+    devtools((...a) => ({
+      ...todoSlice(...a),
+    })),
+    {
+      name: "todos",
+    }
+  )
 );
 
 export default useStore;
