@@ -17,14 +17,20 @@ const TaskList = () => {
         ))}
       </div>
 
-      {tasks.length ? <div className="flex text-gray-500 pt-5">
-        <p>
-          Total {tasks.length === 1 ? "Task" : "Tasks"}: <span className="">{tasks.length}</span>
-        </p>
-        <p className="pl-5">
-          Completed {completedTasks.length === 1 ? "Task" : "Tasks"}: <span className="">{completedTasks.length}</span>
-        </p>
-      </div> : <></>}
+      {tasks.length ? (
+        <div className="flex text-gray-500 pt-5">
+          <p className="text-sm md:text-base">
+            Total {tasks.length === 1 ? "Task" : "Tasks"}:{" "}
+            <span className="">{tasks.length}</span>
+          </p>
+          <p className="text-sm md:text-base pl-4 md:pl-5">
+            Completed {completedTasks.length === 1 ? "Task" : "Tasks"}:{" "}
+            <span className="">{completedTasks.length}</span>
+          </p>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

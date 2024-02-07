@@ -2,6 +2,9 @@
 
 import useStore from "@/store/store";
 import React, { useState } from "react";
+import { FaEdit, FaSave } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { ImCross } from "react-icons/im";
 
 const Task = ({ task }) => {
   const { toggleTask, deleteTask, editTask } = useStore((state) => state);
@@ -50,12 +53,12 @@ const Task = ({ task }) => {
               type="checkbox"
               checked={task.completed}
               onChange={handleToggle}
-              className="w-6 h-6"
+              className="w-4 h-4 md:w-6 md:h-6"
             />
           </td>
           {editing ? (
             <>
-              <td className="px-4 py-2">
+              <td className="p-2 w-full md:w-auto">
                 <input
                   type="text"
                   value={editedText}
@@ -63,7 +66,7 @@ const Task = ({ task }) => {
                   className="p-2 w-full"
                 />
               </td>
-              <td className="px-4 py-2">
+              <td className="p-2 w-full md:w-auto">
                 <select
                   value={editedPriority}
                   onChange={(e) => setEditedPriority(e.target.value)}
@@ -74,52 +77,40 @@ const Task = ({ task }) => {
                   <option value="high">High</option>
                 </select>
               </td>
-              <td className="px-4 py-2">
-                <button
-                  onClick={handleSave}
-                  className="bg-green-500 text-white px-2 py-1 rounded mr-2"
-                >
-                  Save
-                </button>
-                <button
-                  onClick={handleCancel}
-                  className="bg-red-500 text-white px-2 py-1 rounded"
-                >
-                  Cancel
-                </button>
+
+              <td className="p-2 w-full md:w-auto">
+                <div className="flex space-x-2">
+                  <FaSave
+                    onClick={handleSave}
+                    className="w-4 h-4 md:w-5 md:h-5 text-green-500 rounded cursor-pointer"
+                  />
+
+                  <ImCross
+                    onClick={handleCancel}
+                    className="w-4 h-4 md:w-5 md:h-5 text-red-500 rounded cursor-pointer"
+                  />
+                </div>
               </td>
             </>
           ) : (
             <>
-              <td
-                className={`${
-                  task.completed ? "line-through" : ""
-                }`}
-              >
+              <td className={`${task.completed ? "line-through" : ""}`}>
                 {task.text}
               </td>
             </>
           )}
 
-          <td
-            className="px-4 py-2 text-right"
-            colSpan="2"
-          >
+          <td className="px-4 py-2 flex justify-end" colSpan="2">
             {!editing && (
-              <button
+              <FaEdit
                 onClick={handleEdit}
-                className="bg-yellow-500 text-white px-2 py-1 rounded"
-              >
-                Edit
-              </button>
+                className="px-2 py-1 w-8 h-8 md:w-10 md:h-10 text-gray-500 rounded cursor-pointer"
+              />
             )}
-
-            <button
+            <MdDelete
               onClick={handleDelete}
-              className="bg-red-500 text-white ml-2 px-2 py-1 rounded"
-            >
-              Delete
-            </button>
+              className="pl-2 py-1 w-8 h-8 md:w-10 md:h-10 text-red-600 rounded cursor-pointer"
+            />
           </td>
         </tr>
       </tbody>
