@@ -2,7 +2,6 @@
 
 import useStore from "@/store/store";
 import React, { useState } from "react";
-import { FaChevronDown } from "react-icons/fa6";
 
 const TaskForm = () => {
   const [text, setText] = useState("");
@@ -16,36 +15,34 @@ const TaskForm = () => {
     setText("");
   };
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
+    <form
+      onSubmit={handleSubmit}
+      className="mb-8 flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-5"
+    >
       <input
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Add new task"
-        className="border-gray-300 border-solid border p-2 mr-2"
+        className="border-gray-200 border p-4 outline-none flex-1 rounded"
       />
 
-      <div className="inline-block relative mr-2">
-        <select
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-          className="appearance-none bg-white border border-gray-300 rounded px-10 py-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        >
-          <option disabled selected>
-            Select Priority
-          </option>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-        <div className=" absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-          <FaChevronDown />
-        </div>
-      </div>
+      <select
+        value={priority}
+        onChange={(e) => setPriority(e.target.value)}
+        className="rounded px-4 py-2 border border-gray-200 text-gray-400 font-semibold leading-tight outline-none bg-white cursor-pointer"
+      >
+        <option disabled defaultValue>
+          Select Priority
+        </option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
 
       <button
         type="submit"
-        className="bg-yellow-500 text-white px-4 py-2 rounded"
+        className="bg-yellow-500 text-white font-semibold uppercase px-10 py-2 rounded"
       >
         Add Task
       </button>

@@ -94,7 +94,7 @@ const Task = ({ task }) => {
               <td
                 className={`${
                   task.completed ? "line-through" : ""
-                } `}
+                }`}
               >
                 {task.text}
               </td>

@@ -7,6 +7,7 @@ import useStore from "@/store/store";
 const TaskList = () => {
   const { tasks } = useStore((state) => state);
   const completedTasks = tasks.filter((task) => task.completed);
+  console.log(tasks);
 
   return (
     <div className="">
@@ -16,14 +17,14 @@ const TaskList = () => {
         ))}
       </div>
 
-      <div className="flex text-gray-500 pt-5">
+      {tasks.length ? <div className="flex text-gray-500 pt-5">
         <p>
-          Total Tasks: <span className="">{tasks.length}</span>
+          Total {tasks.length === 1 ? "Task" : "Tasks"}: <span className="">{tasks.length}</span>
         </p>
         <p className="pl-5">
-          Completed Tasks: <span className="">{completedTasks.length}</span>
+          Completed {completedTasks.length === 1 ? "Task" : "Tasks"}: <span className="">{completedTasks.length}</span>
         </p>
-      </div>
+      </div> : <></>}
     </div>
   );
 };
