@@ -3,6 +3,7 @@
 import React from "react";
 import Task from "./Task";
 import useStore from "@/store/store";
+import { ScaleLoader } from "react-spinners";
 
 const TaskList = () => {
   const { tasks } = useStore((state) => state);
@@ -22,26 +23,34 @@ const TaskList = () => {
   const completedTasks = sortedTasks.filter((task) => task.completed);
 
   return (
-    <div className="">
-      <div className="space-y-1">
-        {sortedTasks.map((task) => (
-          <Task key={task.id} task={task} />
-        ))}
-      </div>
-
-      {sortedTasks.length ? (
-        <div className="flex text-gray-500 pt-5">
-          <p className="text-sm md:text-base">
-            Total {sortedTasks.length === 1 ? "Task" : "Tasks"}:{" "}
-            <span className="">{sortedTasks.length}</span>
-          </p>
-          <p className="text-sm md:text-base pl-4 md:pl-5">
-            Completed {completedTasks.length === 1 ? "Task" : "Tasks"}:{" "}
-            <span className="">{completedTasks.length}</span>
-          </p>
+    <div>
+      {!tasks.length ? (
+        <div className="flex justify-center">
+          <ScaleLoader color="#78C800" loading={true} width={6} margin={4} />
         </div>
       ) : (
-        <></>
+        <>
+          <div className="space-y-1">
+            {sortedTasks.map((task) => (
+              <Task key={task.id} task={task} />
+            ))}
+          </div>
+
+          {sortedTasks.length ? (
+            <div className="flex text-gray-500 pt-5">
+              <p className="text-sm md:text-base">
+                Total {sortedTasks.length === 1 ? "Task" : "Tasks"}:{" "}
+                <span className="">{sortedTasks.length}</span>
+              </p>
+              <p className="text-sm md:text-base pl-4 md:pl-5">
+                Completed {completedTasks.length === 1 ? "Task" : "Tasks"}:{" "}
+                <span className="">{completedTasks.length}</span>
+              </p>
+            </div>
+          ) : (
+            <></>
+          )}
+        </>
       )}
     </div>
   );
