@@ -30,7 +30,7 @@ const TaskForm = () => {
       <select
         value={priority}
         onChange={(e) => setPriority(e.target.value)}
-        className="rounded px-4 py-2 border border-gray-200 text-gray-400 font-semibold leading-tight outline-none bg-white cursor-pointer"
+        className="rounded px-4 py-2 border border-gray-200 text-gray-400 font-semibold leading-tight outline-none bg-white cursor-pointer w-40 md:w-auto"
       >
         <option disabled defaultValue>
           Select Priority
