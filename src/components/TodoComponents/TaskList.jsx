@@ -1,12 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Task from "./Task";
 import useStore from "@/store/store";
 import { ScaleLoader } from "react-spinners";
 
 const TaskList = () => {
   const { tasks } = useStore((state) => state);
+  const [showNoTaskMessage, setShowNoTaskMessage] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (tasks.length === 0) {
+        setShowNoTaskMessage(true);
+      }
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, [tasks]);
 
   const sortedTasks = [...tasks].sort((a, b) => {
     if (a.priority === b.priority) {
@@ -24,7 +35,7 @@ const TaskList = () => {
 
   return (
     <div>
-      {!tasks.length ? (
+      {!tasks.length && !showNoTaskMessage ? (
         <div className="flex justify-center">
           <ScaleLoader color="#78C800" loading={true} width={6} margin={4} />
         </div>
@@ -51,6 +62,10 @@ const TaskList = () => {
             <></>
           )}
         </>
+      )}
+
+      {showNoTaskMessage && !tasks.length && (
+        <div className="text-center text-red-500 mt-4">No task Found!</div>
       )}
     </div>
   );
